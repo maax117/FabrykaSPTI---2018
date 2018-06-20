@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Fabryka.Maszyna>
+
+@{
+    ViewBag.Title = "Fabryka - Maszyny";
+}
+
+<h2>Maszyny</h2>
+
+<p>
+    @Html.ActionLink("Dodaj maszynę", "Create")
+    @using (Html.BeginForm("Index", "Maszyna", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <div class="form-group">
+            <br />
+            <input type="text" name="wyszukaj_maszyne" value="" class="form-control" />
+            <input type="submit" name="Szukaj" value="Szukaj" class="btn btn-primary" />
+        </div>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_uruchomienia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hala.Nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_uruchomienia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hala.Nazwa)
+        </td>
+        <td>
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Opis", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
